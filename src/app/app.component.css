@@ -1,0 +1,59 @@
+.nav-item{
+    font-size: 1.1em;
+    font-weight: 400;
+}
+.cartLogo{
+    font-size: 1.5em;
+}
+.cartBtn:hover{
+    color: white;
+    background-color: black;
+}
+ #product-item:hover{
+    font-weight: bold;
+ }
+.container-fluid{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-brand{
+    flex-grow: 5;
+}
+
+.content{
+    display: flex;
+    justify-content: space-evenly;
+}
+.catalogue{
+    margin-top: 4%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-shrink: 5;
+}
+.filterCard{
+    margin-left: 3%;
+    margin-top: 5%;
+    padding-left: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    width: 20rem;
+    height:max-content;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.formcheck{
+    margin-left: 100px;
+}
+input[type='checkbox'] {
+    background-color: rgb(49, 49, 49);
+}
+.price-range{
+    display: flex;
+    justify-content: space-around;
+}
+.price-range > input{
+    width: 40%;
+}

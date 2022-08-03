@@ -1,0 +1,22 @@
+.card{
+    width: 14rem;
+    margin: 5% 5% 5% 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.product-img{
+    height: 212px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+}
+#addToCartBtn{
+    background-color: black;
+    outline-color: black;
+}
+#addToCartBtn:hover{
+    background-color: white;
+    color: black;
+}
