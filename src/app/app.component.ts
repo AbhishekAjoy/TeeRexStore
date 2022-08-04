@@ -150,42 +150,54 @@ export class AppComponent {
   }
 
   searchProduct() {
-    let colorFilter: productModel[] = [];
-    let genderFilter: productModel[] = [];
-    let typeFilter: productModel[] = [];
     if (this.searchTerm) {
       this.applyFilters();
       let keywords = this.searchTerm.toLowerCase().split(' ');
-      colorFilter = this.filteredProducts.filter((e) => {
-        return keywords.includes(e.color.toLowerCase());
-      });
-      console.log(colorFilter);
-      if (colorFilter.length) {
-        typeFilter = colorFilter.filter((e) => {
-          return keywords.includes(e.type.toLowerCase());
-        });
-      } else {
-        typeFilter = this.filteredProducts.filter((e) => {
-          return keywords.includes(e.type.toLowerCase());
-        });
+      if (keywords.length === 0) {
+        return;
       }
-      console.log(typeFilter);
-      if (typeFilter.length) {
-        genderFilter = typeFilter.filter((e) => {
-          return keywords.includes(e.gender.toLowerCase());
-        });
-      } else if (colorFilter.length) {
-        genderFilter = colorFilter.filter((e) => {
-          return keywords.includes(e.gender.toLowerCase());
-        });
-      } else {
-        genderFilter = this.filteredProducts.filter((e) => {
-          return keywords.includes(e.gender.toLowerCase());
-        });
+
+      let genderKey: string[] = [];
+      let typeKey: string[] = [];
+      let colorKey: string[] = [];
+      for (const i of this.genders) {
+        if (keywords.includes(i.toLowerCase())) {
+          genderKey.push(i.toLowerCase());
+        }
       }
-      console.log(genderFilter);
-      this.filteredProducts = genderFilter;
-      console.log(this.filteredProducts);
+      for (const j of this.types) {
+        if (keywords.includes(j.toLowerCase())) {
+          typeKey.push(j.toLowerCase());
+        }
+      }
+      for (const k of this.colors) {
+        if (keywords.includes(k.toLowerCase())) {
+          colorKey.push(k.toLowerCase());
+        }
+      }
+
+      this.filteredProducts = this.filteredProducts
+        .filter((e) => {
+          if (colorKey.length) {
+            return colorKey.includes(e.color.toLowerCase());
+          } else {
+            return e;
+          }
+        })
+        .filter((e) => {
+          if (typeKey.length) {
+            return typeKey.includes(e.type.toLowerCase());
+          } else {
+            return e;
+          }
+        })
+        .filter((e) => {
+          if (genderKey.length) {
+            return genderKey.includes(e.gender.toLowerCase());
+          } else {
+            return e;
+          }
+        });
     }
   }
 
