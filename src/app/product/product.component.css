@@ -3,6 +3,13 @@
     margin: 5% 5% 5% 5%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class="card"] {
+      margin: 2% 2% 2% 2%;
+      width:100%;
+    }
+  }
 .product-img{
     height: 212px;
     background-size: cover;

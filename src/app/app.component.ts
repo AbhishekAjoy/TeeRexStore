@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'TeeRex';
+  title = 'TeeRex Store';
   products: productModel[] = [];
   filteredProducts: productModel[] = [];
   colors: string[] = [];
@@ -18,7 +18,6 @@ export class AppComponent {
   types: string[] = [];
   minVal: number | null = null;
   maxVal: number | null = null;
-
 
   myForm: FormGroup;
 
@@ -79,12 +78,18 @@ export class AppComponent {
   onChangePrice() {
     const minPrice = <FormControl>this.myForm.controls['minPrice'];
     const maxPrice = <FormControl>this.myForm.controls['maxPrice'];
-  
-      if(this.minVal && this.maxVal && this.minVal > this.maxVal){this.minVal = null; this.maxVal = null}
-      if(this.minVal){minPrice.setValue(this.minVal);}
-      if(this.maxVal){maxPrice.setValue(this.maxVal);}
-      
-      
+
+    if (this.minVal && this.maxVal && this.minVal > this.maxVal) {
+      this.minVal = null;
+      this.maxVal = null;
+    }
+    if (this.minVal) {
+      minPrice.setValue(this.minVal);
+    }
+    if (this.maxVal) {
+      maxPrice.setValue(this.maxVal);
+    }
+
     this.applyFilters();
   }
 
@@ -107,13 +112,15 @@ export class AppComponent {
           return e;
         }
         return this.myForm.value.genders.includes(e.gender);
-      }).filter((e) => {
-        if(this.myForm.value.minPrice == null){
+      })
+      .filter((e) => {
+        if (this.myForm.value.minPrice == null) {
           return e;
         }
         return e.price >= this.myForm.value.minPrice;
-      }).filter((e) => {
-        if(this.myForm.value.maxPrice == null){
+      })
+      .filter((e) => {
+        if (this.myForm.value.maxPrice == null) {
           return e;
         }
         return e.price <= this.myForm.value.maxPrice;
@@ -127,6 +134,10 @@ export class AppComponent {
     });
   }
 
+  openFilters(){
+    let filterCard = document.getElementsByClassName('filterCard')[0] as HTMLElement;
+    filterCard.style.display = 'block';
+  }
   getFilterOptions() {
     this.colors = [...new Set(this.products.map((item) => item.color))];
     this.genders = [...new Set(this.products.map((item) => item.gender))];

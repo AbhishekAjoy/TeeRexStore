@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <span class="navbar-brand ps-5 mb-0 py-0 ms-5 h1">TeeRex Store</span>
+    <span class="title navbar-brand1">{{ title }}</span>
     <button
       class="navbar-toggler"
       type="button"
@@ -29,91 +29,121 @@
   </div>
 </nav>
 <div class="content">
-  <div class="filterCard">
-    <div class="card-body">
-      <form [formGroup]="myForm">
-        <h5 class="card-title">Color</h5>
-        <br />
-        <div *ngFor="let color of colors">
-          <div class="form-check">
-            <input
-              (change) = "onChangeColor(color, $event.target)"
-              class="form-check-input"
-              type="checkbox"
-              [value]="color"
-              id="flexCheckDefault"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              {{ color }}
-            </label>
-          </div>
-        </div>
-        <br />
-        <h5 class="card-title">Gender</h5>
-        <br />
-        <div *ngFor="let gender of genders">
-          <div class="form-check">
-            <input
-            (change) = "onChangeGender(gender, $event.target)"
-              class="form-check-input"
-              type="checkbox"
-              [value]="gender"
-              id="flexCheckDefault"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              {{ gender }}
-            </label>
-          </div>
-        </div>
-        <br />
-        <h5 class="card-title">Price</h5>
-        <br />
-        <div class="price-range">
-          <input
-            [(ngModel)] = "minVal"
-            [ngModelOptions]="{standalone: true}"
-            (change)="onChangePrice()"
-            class="form-control"
-            type="number"
-            placeholder="Min"
-            min="0"
-            aria-label="minimum input"
-          />
-          <input
-            [(ngModel)] = "maxVal"
-            [ngModelOptions]="{standalone: true}"
-            (change)="onChangePrice()"
-            class="form-control"
-            type="number"
-            placeholder="Max"
-            aria-label="Maximum input"
-          />
-        </div>
-
-        <br />
-        <h5 class="card-title">Type</h5>
-        <br />
-        <div *ngFor="let type of types">
-          <div class="form-check">
-            <input
-            (change) = "onChangeType(type, $event.target)"
-              class="form-check-input"
-              type="checkbox"
-              [value]="type"
-              id="flexCheckDefault"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              {{ type }}
-            </label>
-          </div>
-        </div>
-      </form>
+  <div class="search-container">
+    <div class="input-group">
+      <input
+        id="search-bar"
+        type="text"
+        class="form-control shadow-none"
+        placeholder="Search for Products..."
+        aria-label="Search Input Field"
+        aria-describedby="search-btn"
+      />
+      <button
+      class="btn btn-outline-secondary shadow-none"
+      type="button"
+      id="filter-btn"
+      (click)="openFilters()"
+    >
+      <i class="bi bi-funnel"></i>
+    </button>
+      <button
+        class="btn btn-outline-secondary shadow-none"
+        type="button"
+        id="search-btn"
+      >
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </div>
+  <div class="section">
+    <div class="filterCard">
+      <div class="card-body">
+        <form [formGroup]="myForm">
+          <h5 class="card-title">Color</h5>
+          <br />
+          <div *ngFor="let color of colors">
+            <div class="form-check">
+              <input
+                (change)="onChangeColor(color, $event.target)"
+                class="form-check-input shadow-none"
+                type="checkbox"
+                [value]="color"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                {{ color }}
+              </label>
+            </div>
+          </div>
+          <br />
+          <h5 class="card-title">Gender</h5>
+          <br />
+          <div *ngFor="let gender of genders">
+            <div class="form-check">
+              <input
+                (change)="onChangeGender(gender, $event.target)"
+                class="form-check-input shadow-none"
+                type="checkbox"
+                [value]="gender"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                {{ gender }}
+              </label>
+            </div>
+          </div>
+          <br />
+          <h5 class="card-title">Price</h5>
+          <br />
+          <div class="price-range">
+            <input
+              [(ngModel)]="minVal"
+              [ngModelOptions]="{ standalone: true }"
+              (change)="onChangePrice()"
+              class="form-control shadow-none"
+              type="number"
+              placeholder="Min"
+              min="0"
+              aria-label="minimum input"
+            />
+            <input
+              [(ngModel)]="maxVal"
+              [ngModelOptions]="{ standalone: true }"
+              (change)="onChangePrice()"
+              class="form-control shadow-none"
+              type="number"
+              placeholder="Max"
+              aria-label="Maximum input"
+              min="0"
+            />
+          </div>
 
-  <div class="catalogue">
-    <div *ngFor="let product of filteredProducts">
-      <app-product [product]="product"></app-product>
+          <br />
+          <h5 class="card-title">Type</h5>
+          <br />
+          <div *ngFor="let type of types">
+            <div class="form-check">
+              <input
+                (change)="onChangeType(type, $event.target)"
+                class="form-check-input shadow-none"
+                type="checkbox"
+                [value]="type"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                {{ type }}
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="catalogue">
+      <div *ngFor="let product of filteredProducts">
+        <app-product [product]="product"></app-product>
+      </div>
     </div>
   </div>
 </div>
