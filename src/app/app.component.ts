@@ -18,6 +18,7 @@ export class AppComponent {
   types: string[] = [];
   minVal: number | null = null;
   maxVal: number | null = null;
+  isFilterClicked: boolean = false;
 
   myForm: FormGroup;
 
@@ -134,9 +135,17 @@ export class AppComponent {
     });
   }
 
-  openFilters(){
-    let filterCard = document.getElementsByClassName('filterCard')[0] as HTMLElement;
-    filterCard.style.display = 'block';
+  openFilters() {
+    let filterCard = document.getElementsByClassName(
+      'filterCard'
+    )[0] as HTMLElement;
+    if (this.isFilterClicked) {
+      filterCard.style.display = 'none';
+      this.isFilterClicked = false;
+    } else {
+      filterCard.style.display = 'block';
+      this.isFilterClicked = true;
+    }
   }
   getFilterOptions() {
     this.colors = [...new Set(this.products.map((item) => item.color))];
