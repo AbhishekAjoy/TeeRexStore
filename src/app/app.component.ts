@@ -19,6 +19,7 @@ export class AppComponent {
   minVal: number | null = null;
   maxVal: number | null = null;
   isFilterClicked: boolean = false;
+  searchTerm: string | null = null;
 
   myForm: FormGroup;
 
@@ -94,7 +95,7 @@ export class AppComponent {
     this.applyFilters();
   }
 
-  applyFilters() {
+  applyFilters(search?: string) {
     this.filteredProducts = this.products
       .filter((e) => {
         if (this.myForm.value.colors.length === 0) {
@@ -147,6 +148,47 @@ export class AppComponent {
       this.isFilterClicked = true;
     }
   }
+
+  searchProduct() {
+    let colorFilter: productModel[] = [];
+    let genderFilter: productModel[] = [];
+    let typeFilter: productModel[] = [];
+    if (this.searchTerm) {
+      this.applyFilters();
+      let keywords = this.searchTerm.toLowerCase().split(' ');
+      colorFilter = this.filteredProducts.filter((e) => {
+        return keywords.includes(e.color.toLowerCase());
+      });
+      console.log(colorFilter);
+      if (colorFilter.length) {
+        typeFilter = colorFilter.filter((e) => {
+          return keywords.includes(e.type.toLowerCase());
+        });
+      } else {
+        typeFilter = this.filteredProducts.filter((e) => {
+          return keywords.includes(e.type.toLowerCase());
+        });
+      }
+      console.log(typeFilter);
+      if (typeFilter.length) {
+        genderFilter = typeFilter.filter((e) => {
+          return keywords.includes(e.gender.toLowerCase());
+        });
+      } else if (colorFilter.length) {
+        genderFilter = colorFilter.filter((e) => {
+          return keywords.includes(e.gender.toLowerCase());
+        });
+      } else {
+        genderFilter = this.filteredProducts.filter((e) => {
+          return keywords.includes(e.gender.toLowerCase());
+        });
+      }
+      console.log(genderFilter);
+      this.filteredProducts = genderFilter;
+      console.log(this.filteredProducts);
+    }
+  }
+
   getFilterOptions() {
     this.colors = [...new Set(this.products.map((item) => item.color))];
     this.genders = [...new Set(this.products.map((item) => item.gender))];

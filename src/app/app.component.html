@@ -33,6 +33,7 @@
     <div class="input-group">
       <input
         id="search-bar"
+        [(ngModel)] = "searchTerm"
         type="text"
         class="form-control shadow-none"
         placeholder="Search for Products..."
@@ -51,6 +52,7 @@
         class="btn btn-outline-secondary shadow-none"
         type="button"
         id="search-btn"
+        (click)="searchProduct()"
       >
         <i class="bi bi-search"></i>
       </button>
