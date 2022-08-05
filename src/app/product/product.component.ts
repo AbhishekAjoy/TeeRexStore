@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { productModel } from './product.model';
 
 @Component({
@@ -10,6 +10,7 @@ export class ProductComponent implements OnInit {
 
   constructor() { }
 
+  @Output() productIdEmitter:EventEmitter<number> = new EventEmitter<number>()
   @Input() product: productModel = {
     "id": 0,
     "imageURL" :"",
@@ -27,4 +28,14 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  checkQuantity(product: productModel){
+
+    if(product.quantity){
+      console.log(product.name);
+      this.productIdEmitter.emit(product.id);
+    }
+    else{
+      console.log('Product Stock empty');
+    }
+  }
 }

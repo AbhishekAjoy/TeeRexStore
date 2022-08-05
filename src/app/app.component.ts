@@ -12,6 +12,7 @@ export class AppComponent {
   title = 'TeeRex Store';
   products: productModel[] = [];
   filteredProducts: productModel[] = [];
+  cart:productModel[] = [];
   colors: string[] = [];
   genders: string[] = [];
   prices: number[] = [];
@@ -201,6 +202,11 @@ export class AppComponent {
     }
   }
 
+  addToCart(productId: number){
+    let newItem = this.products.filter((e) => { return e.id === productId});
+    this.cart.push(newItem[0]);
+    console.log(`Cart: ${JSON.stringify(this.cart)}`)
+  }
   getFilterOptions() {
     this.colors = [...new Set(this.products.map((item) => item.color))];
     this.genders = [...new Set(this.products.map((item) => item.gender))];

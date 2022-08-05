@@ -8,6 +8,6 @@
   <div class="card-body">
     <h5 class="card-title">{{ this.product.name }}</h5>
     <p class="card-text">{{this.product.currency}} {{this.product.price}}</p>
-    <a href="#" id = "addToCartBtn" class="btn btn-primary">Add to Cart</a>
+    <a href="#" id = "addToCartBtn" class="btn btn-primary" (click) = "checkQuantity(this.product)">Add to Cart</a>
   </div>
 </div>

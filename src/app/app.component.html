@@ -22,7 +22,7 @@
         <li class="nav-item">
           <a class="btn cartBtn py-0" href="#cart" role="button"
             ><i class="bi bi-cart3 cartLogo"></i
-          ></a>
+          ><sup><span class="badge badge-secondary">{{this.cart.length?this.cart.length:''}}</span></sup></a>
         </li>
       </ul>
     </div>
@@ -144,7 +144,7 @@
 
     <div class="catalogue">
       <div *ngFor="let product of filteredProducts">
-        <app-product [product]="product"></app-product>
+        <app-product [product]="product" (productIdEmitter) = "addToCart($event)"></app-product>
       </div>
     </div>
   </div>

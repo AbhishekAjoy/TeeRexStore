@@ -9,6 +9,27 @@
   color: white;
   background-color: black;
 }
+.cartBtn:hover .badge{
+  color: white;
+  background-color: black;
+}
+.title {
+  margin-left: 5%;
+  flex-grow: 5;
+  font-weight: 500;
+  font-size: 1.3em;
+}
+sup {
+  top: -.9em;
+  position: relative;
+  font-size: 90%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+.badge{
+  color:black;
+  padding: 0;
+}
 #product-item:hover {
   font-weight: bold;
 }
@@ -57,12 +78,7 @@
   height: max-content;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.title {
-  margin-left: 5%;
-  flex-grow: 5;
-  font-weight: 500;
-  font-size: 1.3em;
-}
+
 #filter-btn {
   display: none;
 }
