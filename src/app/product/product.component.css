@@ -19,11 +19,23 @@
     display: flex;
     flex-direction: column;
 }
-#addToCartBtn{
+.addToCartBtn{
     background-color: black;
     outline-color: black;
+    color:white;
 }
-#addToCartBtn:hover{
+.outOfStockBtn{
+    background-color: white;
+    outline-color: red;
+    border-color: red;
+    color: red;
+}
+.outOfStockBtn:hover{
+    background-color: red;
+    outline-color: red;
+    color: white;
+}
+.addToCartBtn:hover{
     background-color: white;
     color: black;
 }

@@ -107,6 +107,9 @@ sup {
     width:70%;
     margin-left: 15%;
   }
+  #product-item{
+    display:none;
+  }
   .title {
     margin-left: 0% !important;
     padding-left: 0 !important;

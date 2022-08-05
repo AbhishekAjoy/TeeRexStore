@@ -8,6 +8,6 @@
   <div class="card-body">
     <h5 class="card-title">{{ this.product.name }}</h5>
     <p class="card-text">{{this.product.currency}} {{this.product.price}}</p>
-    <a href="#" id = "addToCartBtn" class="btn btn-primary" (click) = "checkQuantity(this.product)">Add to Cart</a>
+    <button   [ngClass]="inStock? 'btn addToCartBtn shadow-none': 'btn outOfStockBtn shadow-none'" (click) = "checkQuantity(this.product)">{{inStock?'Add to Cart':'Out of Stock'}}</button>
   </div>
 </div>

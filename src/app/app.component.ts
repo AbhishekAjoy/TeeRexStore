@@ -203,9 +203,10 @@ export class AppComponent {
   }
 
   addToCart(productId: number){
-    let newItem = this.products.filter((e) => { return e.id === productId});
-    this.cart.push(newItem[0]);
-    console.log(`Cart: ${JSON.stringify(this.cart)}`)
+    let productIndex = this.products.findIndex((prod => prod.id == productId));
+    this.products[productIndex].quantity -= 1;
+    let newItem = this.products[productIndex];
+    this.cart.push(newItem);
   }
   getFilterOptions() {
     this.colors = [...new Set(this.products.map((item) => item.color))];

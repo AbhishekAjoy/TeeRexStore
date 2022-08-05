@@ -22,7 +22,7 @@ export class ProductComponent implements OnInit {
     "gender" : "",
     "quantity" : 0,
   } 
-
+  inStock: boolean = true;
   imgHeight: string = "212";
   
   ngOnInit(): void {
@@ -30,11 +30,13 @@ export class ProductComponent implements OnInit {
 
   checkQuantity(product: productModel){
 
+    console.log(product.quantity);
     if(product.quantity){
       console.log(product.name);
       this.productIdEmitter.emit(product.id);
     }
     else{
+      this.inStock = false;
       console.log('Product Stock empty');
     }
   }
