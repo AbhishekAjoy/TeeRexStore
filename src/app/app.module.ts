@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CartItemComponent } from './cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductComponent
+    ProductComponent,
+    CartItemComponent
   ],
   imports: [
     BrowserModule,

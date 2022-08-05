@@ -30,9 +30,7 @@ export class ProductComponent implements OnInit {
 
   checkQuantity(product: productModel){
 
-    console.log(product.quantity);
     if(product.quantity){
-      console.log(product.name);
       this.productIdEmitter.emit(product.id);
     }
     else{

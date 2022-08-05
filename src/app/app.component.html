@@ -1,39 +1,49 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
+    <div id="backBtn" (click)="openProductPage()">
+      <i class="bi bi-chevron-left"></i>
+    </div>
     <span class="title navbar-brand1">{{ title }}</span>
-    <!-- <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
     <div id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item" id="product-item">
-          <a class="nav-link active pe-5 py-0 mt-2" aria-current="page" href="#"
-            >Products</a
+          <a
+            [ngClass]="
+              isProductPage
+                ? 'nav-link active me-5 py-0 mt-1'
+                : 'nav-link me-5 py-0 mt-2'
+            "
+            (click)="openProductPage()"
+            aria-current="page"
           >
+            Products
+          </a>
         </li>
         <li class="nav-item">
-          <a class="btn cartBtn py-0" href="#cart" role="button"
-            ><i class="bi bi-cart3 cartLogo"></i
-          ><sup><span class="badge badge-secondary">{{this.cart.length?this.cart.length:''}}</span></sup></a>
+          <button (click)="openCartPage()" id="cartBtn" class="btn py-0">
+            <i class="bi bi-cart3 cartLogo"></i
+            ><sup
+              ><span class="badge badge-secondary">{{
+                this.cart.length ? this.cart.length : ""
+              }}</span></sup
+            >
+          </button>
+        </li>
+        <li class="nav-item" id="shopCart">
+          <a class="nav-link active me-5 py-0 mt-2" aria-current="page">
+            Shopping Cart
+          </a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<div class="content">
+<div *ngIf="isProductPage; else cartPage" class="content">
   <div class="search-container">
     <div class="input-group">
       <input
         id="search-bar"
-        [(ngModel)] = "searchTerm"
+        [(ngModel)]="searchTerm"
         type="text"
         class="form-control shadow-none"
         placeholder="Search for Products..."
@@ -41,13 +51,13 @@
         aria-describedby="search-btn"
       />
       <button
-      class="btn btn-outline-secondary shadow-none"
-      type="button"
-      id="filter-btn"
-      (click)="openFilters()"
-    >
-      <i class="bi bi-funnel"></i>
-    </button>
+        class="btn btn-outline-secondary shadow-none"
+        type="button"
+        id="filter-btn"
+        (click)="openFilters()"
+      >
+        <i class="bi bi-funnel"></i>
+      </button>
       <button
         class="btn btn-outline-secondary shadow-none"
         type="button"
@@ -144,8 +154,22 @@
 
     <div class="catalogue">
       <div *ngFor="let product of filteredProducts">
-        <app-product [product]="product" (productIdEmitter) = "addToCart($event)"></app-product>
+        <app-product
+          [product]="product"
+          (productIdEmitter)="addToCart($event)"
+        ></app-product>
       </div>
     </div>
   </div>
 </div>
+<ng-template #cartPage>
+  <div class="items" *ngFor="let item of cart">
+    <app-cart-item (deleteItemEmitter)="deleteItemInCart($event)"[item]="item"></app-cart-item>
+  </div>
+  <div id="cart-total" class="card">
+    <h5 *ngIf = "cart.length else emptyCart"class="card-title">Total: {{ cartTotal }}</h5>
+    <ng-template #emptyCart>
+      <h5 class="card-title">Cart is Empty</h5>
+    </ng-template>
+  </div>
+</ng-template>

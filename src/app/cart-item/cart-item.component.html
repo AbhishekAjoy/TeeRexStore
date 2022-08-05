@@ -1,0 +1,23 @@
+<div class="cart-content">
+  <div class="card">
+    <img [src]="this.item.imageURL" class="itemImage" [alt]="this.item.name" />
+    <div class="card-body">
+      <div class="item-detail">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.currency }} {{ item.price }}</p>
+      </div>
+      <!-- <a href="#" id = "quantity" (click) = "changeQuantity()" class="btn btn-primary">{{item.quantity }}<i id="dropBtn"class="bi bi-chevron-down"></i></a> -->
+      <div class="dropdown">
+        <button id = "quantity" class="btn btn-secondary dropdown-toggle" (click)="changeQuantity()" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Qty:{{item.quantity}}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+        </ul>
+      </div>
+      <button id="deleteBtn" class="btn btn-primary shadow-none" (click)="deleteItem(item.id)">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

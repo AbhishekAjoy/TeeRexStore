@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 })
 export class AppComponent {
   title = 'TeeRex Store';
+  isProductPage: boolean = true;
   products: productModel[] = [];
   filteredProducts: productModel[] = [];
   cart:productModel[] = [];
@@ -21,7 +22,7 @@ export class AppComponent {
   maxVal: number | null = null;
   isFilterClicked: boolean = false;
   searchTerm: string | null = null;
-
+  cartTotal:number = 0;
   myForm: FormGroup;
 
   constructor(
@@ -205,13 +206,67 @@ export class AppComponent {
   addToCart(productId: number){
     let productIndex = this.products.findIndex((prod => prod.id == productId));
     this.products[productIndex].quantity -= 1;
-    let newItem = this.products[productIndex];
-    this.cart.push(newItem);
+    let newItem:productModel  = {
+      "id": this.products[productIndex].id,
+      "imageURL" :this.products[productIndex].imageURL,
+      "name" :this.products[productIndex].name,
+      "type" :this.products[productIndex].type,
+      "price": this.products[productIndex].price,
+      "currency": this.products[productIndex].currency,
+      "color":  this.products[productIndex].color,
+      "gender" : this.products[productIndex].gender,
+      "quantity" : this.products[productIndex].quantity,
+    } ;
+    let cartIndex = this.cart.findIndex((prod => prod.id === newItem.id));
+    if(cartIndex >= 0){
+      this.cart[cartIndex].quantity += 1;
+    }
+    else{
+      this.cart.push(newItem);
+      cartIndex = this.cart.findIndex((prod => prod.id === newItem.id));
+      this.cart[cartIndex].quantity = 1;
+    }
   }
   getFilterOptions() {
     this.colors = [...new Set(this.products.map((item) => item.color))];
     this.genders = [...new Set(this.products.map((item) => item.gender))];
     this.prices = [...new Set(this.products.map((item) => item.price))].sort();
     this.types = [...new Set(this.products.map((item) => item.type))];
+  }
+
+  calcCartTotal():number{
+    return this.cart.reduce((acc,item) =>{ return acc + item.price * item.quantity},0)
+  }
+  deleteItemInCart(productId:number){
+    this.cart = this.cart.filter(function (e)  {return e.id !== productId});
+    this.cartTotal = this.calcCartTotal();
+  }
+  openCartPage(){
+    this.isProductPage = false;
+    this.title = 'ShansTees';
+    let cartBtn = document.getElementById('cartBtn');
+    let shopCart = document.getElementById('shopCart');
+    let backBtn = document.getElementById('backBtn');
+    this.cartTotal = this.calcCartTotal();
+    if(cartBtn && shopCart && backBtn){
+      cartBtn.style.display = 'none';
+      shopCart.style.display = 'block';
+      backBtn.id = "backBtnEnabled";
+    }
+    if(this.cart.length === 0){
+
+    }
+  }
+  openProductPage(){
+    this.isProductPage = true;
+    this.title = 'TeeRex Store';
+    let cartBtn = document.getElementById('cartBtn');
+    let shopCart = document.getElementById('shopCart');
+    let backBtn = document.getElementById('backBtnEnabled');
+    if(cartBtn && shopCart && backBtn){
+      cartBtn.style.display = 'block';
+      shopCart.style.display = 'none';
+      backBtn.id = "backBtn";
+    }
   }
 }

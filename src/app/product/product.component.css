@@ -34,8 +34,10 @@
     background-color: red;
     outline-color: red;
     color: white;
+    cursor: pointer;
 }
 .addToCartBtn:hover{
     background-color: white;
     color: black;
+    cursor: pointer;
 }

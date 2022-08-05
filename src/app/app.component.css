@@ -2,14 +2,38 @@
   font-size: 1.1em;
   font-weight: 400;
 }
+
+.active {
+  border-bottom: 2px solid #000;
+  padding-bottom: 10px !important;
+}
 .cartLogo {
   font-size: 1.5em;
 }
-.cartBtn:hover {
+#shopCart {
+  display: none;
+}
+#backBtn {
+  display: none;
+}
+#backBtnEnabled {
+  display: none;
+}
+#cart-total{
+  padding:1% 1% 1% 1%;
+  margin: 2% 5% 2% 5%;
+}
+#cartBtn {
+  color: black;
+  background-color: white;
+  border-color: #000;
+}
+#cartBtn:hover {
   color: white;
   background-color: black;
+  cursor: pointer;
 }
-.cartBtn:hover .badge{
+#cartBtn:hover .badge {
   color: white;
   background-color: black;
 }
@@ -20,18 +44,19 @@
   font-size: 1.3em;
 }
 sup {
-  top: -.9em;
+  top: -0.9em;
   position: relative;
   font-size: 90%;
   line-height: 0;
   vertical-align: baseline;
 }
-.badge{
-  color:black;
+.badge {
+  color: black;
   padding: 0;
 }
 #product-item:hover {
   font-weight: bold;
+  cursor: pointer;
 }
 .container-fluid {
   display: flex;
@@ -55,6 +80,7 @@ sup {
 #search-btn:hover {
   background-color: white;
   color: black;
+  cursor: pointer;
 }
 .section {
   display: flex;
@@ -78,18 +104,22 @@ sup {
   height: max-content;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
 #filter-btn {
   display: none;
 }
-@media only screen and (width > 768px){
-    .filterCard{
-        display:block !important;
-    }
+@media only screen and (width > 768px) {
+  .filterCard {
+    display: block !important;
+  }
 }
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .section{
+  #backBtnEnabled {
+    font-size: 1.8em;
+    padding-right: 5%;
+    display: block;
+  }
+  .section {
     display: flex;
     flex-direction: column;
   }
@@ -98,17 +128,18 @@ sup {
     background-color: black;
     color: white;
   }
-  #filter-btn:hover{
+  #filter-btn:hover {
     background-color: white;
     color: black;
+    cursor: pointer;
   }
   .filterCard {
     display: none;
-    width:70%;
+    width: 70%;
     margin-left: 15%;
   }
-  #product-item{
-    display:none;
+  #product-item {
+    display: none;
   }
   .title {
     margin-left: 0% !important;
@@ -127,6 +158,7 @@ sup {
 }
 input[type="checkbox"] {
   background-color: rgb(49, 49, 49);
+  cursor: pointer;
 }
 .price-range {
   display: flex;
